@@ -30,9 +30,11 @@ RUN yarn install --frozen-lockfile --production=false
 COPY . .
 
 # Build application
-RUN --mount=type=secret,id=clerk_publishable_key \
-    VITE_CLERK_PUBLISHABLE_KEY="$(cat /run/secrets/clerk_publishable_key)" \
-    yarn run build
+# RUN --mount=type=secret,id=clerk_publishable_key \
+#     VITE_CLERK_PUBLISHABLE_KEY="$(cat /run/secrets/clerk_publishable_key)" \
+#     yarn run build
+
+RUN yarn run build
 
 # Remove development dependencies
 RUN yarn install --production=true
