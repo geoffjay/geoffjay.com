@@ -1,0 +1,6 @@
+version: "3"
+
+tasks:
+  deploy:
+    cmds:
+      - flyctl deploy --build-secret clerk_publishable_key=$(cat ./secrets/clerk_publishable_key)
