@@ -1,6 +1,14 @@
 version: "3"
 
 tasks:
+  client/style/build:
+    dir: ./client
+    cmds:
+      - npx tailwindcss -i ./main.css -o ./tailwind.css
+  client/style/watch:
+    dir: ./client
+    cmds:
+      - npx tailwindcss -i ./main.css -o ./tailwind.css --watch
   deploy:
     cmds:
       - echo "Deploying..."
