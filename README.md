@@ -1,3 +1,4 @@
 # Personal Site
 
-Creating this as an entrypoint to personal projects. Initially just auth for personal use.
+Creating this as an entry-point to personal projects, the core Elixir app will
+function as a reverse proxy for other apps.

@@ -1,0 +1,17 @@
+services:
+  caddy:
+    container_name: caddy
+    image: caddy
+    restart: always
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./client:/usr/share/caddy
+
+volumes:
+  caddy-config:
+  caddy-data:

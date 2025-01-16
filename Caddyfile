@@ -1,0 +1,16 @@
+:80 {
+	encode gzip
+
+	# handle /api/* {
+	# 	reverse_proxy localhost:3300
+	# }
+
+	handle {
+		root * /usr/share/caddy
+		file_server
+		try_files {path} /index.html
+		log {
+      output stdout
+    }
+	}
+}
