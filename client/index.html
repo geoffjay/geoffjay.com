@@ -15,11 +15,16 @@
   <body>
     <div id="root" class="bg-slate-200 dark:bg-slate-600">
       <div class="flex justify-center items-center h-screen">
-        <img
-          src="/public/geoffjay.png"
-          alt="geoffjay"
-          class="w-[120px] h-[120px] filter drop-shadow-lg"
-        />
+        <div class="relative flex h-[120px] w-[120px]">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-300 dark:bg-slate-700 opacity-50"
+          ></span>
+          <img
+            src="/public/geoffjay.png"
+            alt="geoffjay"
+            class="w-[120px] h-[120px] filter drop-shadow-lg"
+          />
+        </div>
       </div>
     </div>
   </body>

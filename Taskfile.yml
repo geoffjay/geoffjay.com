@@ -1,6 +1,18 @@
 version: "3"
 
 tasks:
+  dev:
+    desc: "Run development environment"
+    cmds:
+      - overmind start
+  api/build:
+    dir: ./api
+    cmds:
+      - go build -o ./bin/api
+  api/watch:
+    dir: ./api
+    cmds:
+      - air
   client/style/build:
     dir: ./client
     cmds:
@@ -9,6 +21,3 @@ tasks:
     dir: ./client
     cmds:
       - npx tailwindcss -i ./main.css -o ./tailwind.css --watch
-  deploy:
-    cmds:
-      - echo "Deploying..."

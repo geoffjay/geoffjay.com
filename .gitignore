@@ -27,3 +27,10 @@ dist-ssr
 .env*
 !.env.sample
 secrets/
+
+# pocketbase
+pocketbase/backups
+pocketbase/data
+
+# api
+api/bin

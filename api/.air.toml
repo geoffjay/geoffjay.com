@@ -1,0 +1,27 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o bin/api"
+bin = "bin/api"
+full_bin = "bin/api"
+include_ext = ["go"]
+exclude_dir = ["bin", "tmp"]
+exclude_regex = ["_test.go"]
+exclude_unchanged = true
+delay = 1000
+stop_on_error = true
+log = "air.log"
+send_interrupt = true
+
+[log]
+time = false
+
+[color]
+main = "magenta"
+watcher = "cyan"
+build = "yellow"
+runner = "green"
+
+[misc]
+clean_on_exit = true

@@ -1,13 +1,9 @@
-:8080 {
+geoffjay.com {
 	encode gzip
 
 	log {
 		output stdout
 	}
-
-	# handle /api/* {
-	# 	reverse_proxy localhost:3300
-	# }
 
 	handle {
 		root * /usr/share/caddy

@@ -3,13 +3,27 @@ services:
     container_name: caddy
     image: caddy
     restart: always
+    depends_on:
+      - pocketbase
     ports:
       - "8080:8080"
     volumes:
       - caddy-config:/config
       - caddy-data:/data
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./proxy/Caddyfile.dev:/etc/caddy/Caddyfile
       - ./client:/usr/share/caddy
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  pocketbase:
+    container_name: pocketbase
+    build:
+      context: ./pocketbase
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./pocketbase/data:/pb/pb_data
 
 volumes:
   caddy-config:
