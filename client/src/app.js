@@ -3,3 +3,4 @@ import Handlebars from "handlebars";
 
 import "./extensions/json-enc.js";
 import "./extensions/templates.js";
+import "./extensions/preload.js";
