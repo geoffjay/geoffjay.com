@@ -1,8 +1,10 @@
-FROM yarnpkg/node:16.13.0-alpine3.14 AS build
+FROM yarnpkg/node:23-alpine3.20 AS build
 
 COPY client /client
 
 WORKDIR /client
+
+COPY yarn.lock .
 
 RUN yarn install
 RUN yarn build

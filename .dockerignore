@@ -29,7 +29,4 @@
 !**/.env.sample
 **/secrets
 
-# flyctl launch added from apps/dumbauth/.gitignore
-# Logs
-apps/dumbauth
 fly.toml
