@@ -1,4 +1,4 @@
-FROM yarnpkg/node:23-alpine3.20 AS build
+FROM node:23-alpine3.20 AS build
 
 COPY client /client
 
