@@ -4,8 +4,6 @@ COPY client /client
 
 WORKDIR /client
 
-COPY yarn.lock .
-
 RUN yarn install
 RUN yarn build
 
