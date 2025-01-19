@@ -2,15 +2,23 @@
   "apps": [
     {
       "name": "app",
-      "url": "https://app.geoffjay.com"
+      "location": "https://app.geoffjay.com",
+      "icon": "/images/mandala-1.png"
     },
     {
       "name": "about",
-      "url": "https://geoffjay.com/about"
+      "location": "https://geoffjay.com/about",
+      "icon": "/images/mandala-2.png"
     },
     {
       "name": "blog",
-      "url": "https://blog.geoffjay.com"
+      "location": "https://blog.geoffjay.com",
+      "icon": "/images/mandala-3.png"
+    },
+    {
+      "name": "experiments",
+      "location": "https://geoffjay.com/experiments",
+      "icon": "/images/mandala-4.png"
     }
   ]
 }

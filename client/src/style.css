@@ -9,7 +9,7 @@
 
 .menu {
   --d: 120px; /* image size */
-  --rel: 6; /* how much extra space we want between images, 1 = 1 image size */
+  --rel: 3; /* how much extra space we want between images, 1 = 1 image size */
   --ba: 1turn / var(--m); /* base angle = 1 full turn divided by number of edges */
   /* (1 + var(--rel))*var(--d) = polygon edge = img size + extra space */
   --r: calc(
@@ -26,4 +26,19 @@
   width: var(--d);
   --ca: calc(var(--i) * var(--ba));
   transform: rotate(var(--ca)) translate(var(--r)) rotate(calc(-1 * var(--ca)));
+  animation: reveal 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(var(--ca)) translate(var(--r))
+      rotate(calc(-1 * var(--ca)));
+  }
 }
