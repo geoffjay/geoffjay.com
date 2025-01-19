@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.drop-shadow-lg {
+  --tw-drop-shadow: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04))
+    drop-shadow(0 4px 3px rgba(0, 0, 0, 0.4));
+}
+
+.menu {
+  --d: 120px; /* image size */
+  --rel: 6; /* how much extra space we want between images, 1 = 1 image size */
+  --ba: 1turn / var(--m); /* base angle = 1 full turn divided by number of edges */
+  /* (1 + var(--rel))*var(--d) = polygon edge = img size + extra space */
+  --r: calc(
+    0.5 * (1 + var(--rel)) * var(--d) / tan(0.5 * var(--ba))
+  ); /* circle radius */
+  position: absolute;
+  display: grid;
+  width: calc(2 * var(--r) + var(--d)); /* container size */
+}
+
+.menu li {
+  grid-area: 1/1;
+  place-self: center;
+  width: var(--d);
+  --ca: calc(var(--i) * var(--ba));
+  transform: rotate(var(--ca)) translate(var(--r)) rotate(calc(-1 * var(--ca)));
+}

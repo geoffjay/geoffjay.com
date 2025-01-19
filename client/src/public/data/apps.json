@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "app",
+      "url": "https://app.geoffjay.com"
+    },
+    {
+      "name": "about",
+      "url": "https://geoffjay.com/about"
+    },
+    {
+      "name": "blog",
+      "url": "https://blog.geoffjay.com"
+    }
+  ]
+}

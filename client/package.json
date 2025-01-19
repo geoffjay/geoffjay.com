@@ -1,7 +1,22 @@
 {
+  "name": "geoffjay.com",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "Geoff Johnson <geoff.jay@gmail.com> (https://geoffjay.com/)",
+  "private": true,
   "devDependencies": {
+    "@vituum/vite-plugin-concat": "^1.1.0",
     "autoprefixer": "^10.4.20",
+    "handlebars": "^4.7.8",
+    "htmx.org": "^1.9.12",
     "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.0.7"
   }
 }

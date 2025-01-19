@@ -1,2 +1,2 @@
-api: task api/watch
-client: task client/style/watch
+api: task api/dev
+client: task client/dev

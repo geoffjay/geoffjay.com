@@ -9,15 +9,11 @@ tasks:
     dir: ./api
     cmds:
       - go build -o ./bin/api
-  api/watch:
+  api/dev:
     dir: ./api
     cmds:
       - air
-  client/style/build:
+  client/dev:
     dir: ./client
     cmds:
-      - npx tailwindcss -i ./main.css -o ./tailwind.css
-  client/style/watch:
-    dir: ./client
-    cmds:
-      - npx tailwindcss -i ./main.css -o ./tailwind.css --watch
+      - yarn dev
