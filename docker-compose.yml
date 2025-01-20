@@ -1,17 +1,15 @@
 services:
-  caddy:
-    container_name: caddy
-    image: caddy
+  nginx:
+    container_name: nginx
+    image: nginx
     restart: always
     depends_on:
       - pocketbase
     ports:
       - "8080:8080"
     volumes:
-      - caddy-config:/config
-      - caddy-data:/data
-      - ./proxy/Caddyfile.dev:/etc/caddy/Caddyfile
-      - ./client:/usr/share/caddy
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./client:/usr/share/nginx/html
     extra_hosts:
       - host.docker.internal:host-gateway
 

@@ -7,13 +7,8 @@ WORKDIR /client
 RUN yarn install
 RUN yarn build
 
-FROM caddy:2.5.2-alpine
+FROM nginx
 
-RUN apk add bash
+COPY ./proxy/nginx.conf /etc/nginx/nginx.conf
 
-COPY proxy/Caddyfile.prod /etc/caddy/Caddyfile
-
-COPY --from=build /client/dist /usr/share/caddy
-
-COPY script/launch-proxy.sh /proxy.sh
-CMD /proxy.sh
+COPY --from=build /client/dist /usr/share/nginx/html
