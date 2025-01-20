@@ -11,3 +11,7 @@
 		try_files {path} /index.html
 	}
 }
+
+app.geoffjay.com {
+  reverse_proxy app-geoffjay-com.internal
+}
