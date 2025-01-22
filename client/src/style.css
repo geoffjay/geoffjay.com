@@ -18,6 +18,7 @@
   position: absolute;
   display: grid;
   width: calc(2 * var(--r) + var(--d)); /* container size */
+  transform: translate(-50%, -50%);
 }
 
 .menu li {
@@ -31,6 +32,12 @@
   animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.hidden-anim {
+  animation: unreveal 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.1, 0.3, 0.1, 1);
+}
+
 @keyframes reveal {
   0% {
     opacity: 0;
@@ -40,5 +47,17 @@
     opacity: 1;
     transform: rotate(var(--ca)) translate(var(--r))
       rotate(calc(-1 * var(--ca)));
+  }
+}
+
+@keyframes unreveal {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--ca)) translate(var(--r))
+      rotate(calc(-1 * var(--ca)));
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
   }
 }
