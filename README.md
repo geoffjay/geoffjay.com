@@ -1,4 +1,7 @@
 # Personal Site
 
-Creating this as an entry-point to personal projects, the core Elixir app will
-function as a reverse proxy for other apps.
+Creating this as a dumping ground for personal projects.
+
+## License
+
+See the [LICENSE](LICENSE) file.
