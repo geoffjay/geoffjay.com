@@ -1,0 +1,17 @@
+name: Test NGINX Config
+
+on: [push, pull_request]
+
+jobs:
+  test-nginx-config:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install NGINX
+        run: sudo apt-get update && sudo apt-get install -y nginx
+
+      - name: Test NGINX config
+        run: sudo nginx -t -c ${{ github.workspace }}/proxy/nginx.conf
