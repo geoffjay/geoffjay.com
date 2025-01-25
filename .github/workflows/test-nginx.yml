@@ -13,5 +13,11 @@ jobs:
       - name: Install NGINX
         run: sudo apt-get update && sudo apt-get install -y nginx
 
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 geoffjay.com" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 app.geoffjay.com" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 app-geoffjay-com.local" | sudo tee -a /etc/hosts
+
       - name: Test NGINX config
         run: sudo nginx -t -c ${{ github.workspace }}/proxy/nginx.conf
