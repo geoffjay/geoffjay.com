@@ -3,10 +3,7 @@ use yew_router::prelude::*;
 
 use crate::bindings;
 use crate::components::{footer::Footer, nav::Nav};
-use crate::features::{
-    blog::Post,
-    home::Home,
-};
+use crate::features::{blog::Post, home::Home};
 use crate::store::State;
 
 #[derive(Clone, Routable, PartialEq)]

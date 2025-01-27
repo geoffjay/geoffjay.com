@@ -17,7 +17,9 @@ jobs:
         run: |
           sudo echo "127.0.0.1 geoffjay.com" | sudo tee -a /etc/hosts
           sudo echo "127.0.0.1 app.geoffjay.com" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 blog.geoffjay.com" | sudo tee -a /etc/hosts
           sudo echo "127.0.0.1 app-geoffjay-com.internal" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 blog-geoffjay-com.internal" | sudo tee -a /etc/hosts
 
       - name: Test NGINX config
         run: sudo nginx -t -c ${{ github.workspace }}/proxy/nginx.conf

@@ -10,10 +10,7 @@ use crate::features::blog::POSTS;
 
 fn active_link_classes(current: &Route, link: &Route) -> Vec<String> {
     if current.clone() == link.clone() {
-        vec![
-            "bg-gray-300".to_string(),
-            "dark:bg-gray-800".to_string(),
-        ]
+        vec!["bg-gray-300".to_string(), "dark:bg-gray-800".to_string()]
     } else {
         vec![
             "bg-transparent".to_string(),
