@@ -34,3 +34,6 @@ pocketbase/data
 
 # api
 api/bin
+
+# blog
+blog/target

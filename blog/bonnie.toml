@@ -1,0 +1,21 @@
+version = "0.3.2"
+
+[scripts]
+## Builds everything
+build.cmd = "cargo build"
+
+## Builds the frontend
+build.subcommands.frontend = ["cargo build"]
+
+## Runs the frontend, watching for changes (uses Trunk)
+## Tailwind is assumed to be set up after `setup`
+run.subcommands.frontend = ["trunk serve"]
+
+## Create a new blog post
+post.cmd = [
+  "export TITLE=$(echo %title | sed -E \"s/[[:blank:]]/_/g\" | tr \"[:upper:]\" \"[:lower:]\")",
+  "export POST=$(date +%Y-%m-%d)_$TITLE.md",
+  "touch src/features/blog/posts/$POST",
+  "git add src/features/blog/posts/$POST",
+]
+post.args = ["title"]

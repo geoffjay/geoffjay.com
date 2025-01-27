@@ -14,3 +14,89 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  # deploy-blog:
+  #   name: Deploy blog.geoffjay.com
+  #   runs-on: ubuntu-latest
+  #   concurrency: deploy-group
+  #
+  #   env:
+  #     RUST_BACKTRACE: full
+  #     RUSTC_WRAPPER: sccache
+  #     RUSTV: stable
+  #     SCCACHE_CACHE_SIZE: 2G
+  #     SCCACHE_DIR: /home/runner/.cache/sccache
+  #     # SCCACHE_RECACHE: 1 # uncomment to clear cache
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Pre-install
+  #       run: |
+  #         mkdir -p $HOME/.local/bin
+  #         echo "$HOME/.local/bin" >> $GITHUB_PATH
+  #
+  #     - name: Install sccache
+  #       env:
+  #         SCCACHE_LINK: https://github.com/mozilla/sccache/releases/download
+  #         SCCACHE_VERSION: 0.2.13
+  #       run: |
+  #         SCCACHE_FILE=sccache-$SCCACHE_VERSION-x86_64-unknown-linux-musl
+  #         curl -L "$SCCACHE_LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
+  #         mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
+  #
+  #     - name: Install trunk
+  #       env:
+  #         TRUNK_LINK: https://github.com/thedodd/trunk/releases/download
+  #         TRUNK_VERSION: v0.17.0
+  #       run: |
+  #         TRUNK_FILE=trunk-x86_64-unknown-linux-gnu
+  #         curl -L "$TRUNK_LINK/$TRUNK_VERSION/$TRUNK_FILE.tar.gz" | tar xz
+  #         mv -f trunk $HOME/.local/bin/trunk
+  #
+  #     - name: Setup toolchain
+  #       uses: dtolnay/rust-toolchain@master
+  #       with:
+  #         toolchain: stable
+  #
+  #     - name: Cache cargo registry
+  #       uses: actions/cache@v3
+  #       continue-on-error: false
+  #       with:
+  #         path: |
+  #           ~/.cargo/registry
+  #           ~/.cargo/git
+  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-cargo-
+  #
+  #     - name: Save sccache
+  #       uses: actions/cache@v3
+  #       continue-on-error: false
+  #       with:
+  #         path: /home/runner/.cache/sccache
+  #         key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-sccache-
+  #
+  #     - name: Start sccache server
+  #       run: sccache --start-server
+  #
+  #     - name: Add WASM target
+  #       run: rustup target add wasm32-unknown-unknown
+  #
+  #     - name: Build release
+  #       run: |
+  #         trunk build --release
+  #
+  #     - name: Print sccache stats
+  #       run: sccache --show-stats
+  #
+  #     - name: Stop sccache server
+  #       run: sccache --stop-server || true
+  #
+  #     - uses: superfly/flyctl-actions/setup-flyctl@master
+  #     - run: flyctl deploy --remote-only
+  #       env:
+  #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

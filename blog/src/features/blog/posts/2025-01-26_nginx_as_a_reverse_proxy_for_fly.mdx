@@ -1,0 +1,91 @@
+## Nginx as a Reverse Proxy For Fly
+
+Deploying an app to Fly.io creates various "6PN" networking addresses, some of which can be used
+internally and the public facing addresses can be removed. This allows for a secure application
+setup, in my case I wanted to be able to host https://geoffjay.com as the main site, with Nginx
+proxying to private and only internally accessible apps for https://app.geoffjay.com and
+https://blog.geoffjay.com, among others.
+
+Caddy was considered for this, but ultimately Nginx was decided on. Mainly because that's what I
+know, and it happens to be easier to troubleshoot.
+
+### Base nginx.conf
+
+```
+worker_processes  1;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+  server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+
+    server_name geoffjay.com;
+
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    include /etc/nginx/mime.types;
+
+    gzip on;
+    gzip_min_length 1000;
+    gzip_proxied expired no-cache no-store private auth;
+    gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    proxy_read_timeout 300s;
+    proxy_connect_timeout 300s;
+
+    proxy_buffer_size 128k;
+    proxy_buffers 4 256k;
+    proxy_busy_buffers_size 256k;
+
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
+  }
+}
+```
+
+### Reverse Proxy for app.geoffjay.com
+
+This is the part that I found difficult to find clear information on, the `upstream` block is
+necessary, and all of the addresses used need to be accessible, which for me meant having the
+application being proxied always available. Fly.io allows you to do this by configuring a
+minimum number of machines.
+
+```
+server {
+
+  ... existing configuration
+
+  upstream app {
+    keepalive 20;
+    server app-geoffjay-com.internal:8080;
+  }
+
+  server {
+    listen 8080;
+    listen [::]:8080;
+
+    server_name app.geoffjay.com;
+
+    location / {
+      proxy_pass http://app/;
+
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+
+      access_log /var/log/nginx/app_access.log;
+      error_log /var/log/nginx/app_error.log;
+
+      proxy_connect_timeout 60s;
+      proxy_send_timeout 60s;
+      proxy_read_timeout 60s;
+    }
+  }
+}
+```
