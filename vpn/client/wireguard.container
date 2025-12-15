@@ -1,0 +1,35 @@
+[Unit]
+Description=WireGuard VPN Client
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=docker.io/linuxserver/wireguard:latest
+ContainerName=wireguard-client
+
+# Required capabilities for WireGuard
+AddCapability=NET_ADMIN
+AddCapability=SYS_MODULE
+
+# Host networking required for VPN
+Network=host
+
+# Mount WireGuard config and kernel modules
+Volume=/etc/wireguard:/config:Z
+Volume=/lib/modules:/lib/modules:ro
+
+# Environment
+Environment=PUID=0
+Environment=PGID=0
+Environment=TZ=UTC
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+# Set sysctls on host before starting container (can't use Sysctl= with Network=host)
+ExecStartPre=/usr/sbin/sysctl -w net.ipv4.ip_forward=1
+ExecStartPre=/usr/sbin/sysctl -w net.ipv4.conf.all.src_valid_mark=1
+
+[Install]
+WantedBy=multi-user.target

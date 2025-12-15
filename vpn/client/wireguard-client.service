@@ -1,0 +1,38 @@
+[Unit]
+Description=WireGuard VPN Client (Container)
+After=network-online.target docker.service
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+TimeoutStartSec=0
+
+# Load environment from file
+EnvironmentFile=/etc/wireguard/wireguard.env
+
+# Pull and run container
+ExecStartPre=-/usr/bin/docker stop wireguard-client
+ExecStartPre=-/usr/bin/docker rm wireguard-client
+ExecStart=/usr/bin/docker run --rm \
+    --name wireguard-client \
+    --cap-add NET_ADMIN \
+    --cap-add SYS_MODULE \
+    --sysctl net.ipv4.ip_forward=1 \
+    --sysctl net.ipv4.conf.all.src_valid_mark=1 \
+    --network host \
+    -v /lib/modules:/lib/modules:ro \
+    -e WG_PRIVATE_KEY=${WG_PRIVATE_KEY} \
+    -e WG_GATEWAY_PUBLIC_KEY=${WG_GATEWAY_PUBLIC_KEY} \
+    -e WG_ENDPOINT=${WG_ENDPOINT} \
+    -e WG_CLIENT_IP=${WG_CLIENT_IP} \
+    -e WG_ALLOWED_IPS=${WG_ALLOWED_IPS} \
+    -e HOST_INTERFACE=${HOST_INTERFACE} \
+    ghcr.io/linuxserver/wireguard:latest
+
+ExecStop=/usr/bin/docker stop wireguard-client
+
+[Install]
+WantedBy=multi-user.target
