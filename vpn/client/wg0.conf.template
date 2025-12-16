@@ -1,0 +1,21 @@
+# WireGuard Client Configuration Template
+# For the Linux server on your private network
+
+[Interface]
+Address = 10.10.0.2/24
+PrivateKey = YOUR_CLIENT_PRIVATE_KEY_HERE
+
+PostUp = sysctl -w net.ipv4.ip_forward=1
+PostUp = iptables -A FORWARD -i %i -j ACCEPT
+PostUp = iptables -A FORWARD -o %i -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+PostDown = iptables -D FORWARD -i %i -j ACCEPT
+PostDown = iptables -D FORWARD -o %i -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+PublicKey = YOUR_GATEWAY_PUBLIC_KEY_HERE
+Endpoint = vpn-geoffjay-com.fly.dev:51820
+AllowedIPs = 10.10.0.0/24
+PersistentKeepalive = 25

@@ -1,0 +1,19 @@
+# WireGuard Gateway Configuration Template
+# This file is for reference - actual config is generated at runtime from secrets
+
+[Interface]
+Address = 10.10.0.1/24
+ListenPort = 51820
+PrivateKey = ${WG_PRIVATE_KEY}
+
+PostUp = iptables -A FORWARD -i %i -j ACCEPT
+PostUp = iptables -A FORWARD -o %i -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+PostDown = iptables -D FORWARD -i %i -j ACCEPT
+PostDown = iptables -D FORWARD -o %i -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+PublicKey = ${WG_CLIENT_PUBLIC_KEY}
+AllowedIPs = 10.10.0.2/32, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12

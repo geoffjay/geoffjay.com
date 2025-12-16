@@ -1,0 +1,22 @@
+services:
+  wireguard:
+    build: .
+    image: wireguard-client:latest
+    container_name: wireguard-client
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    environment:
+      - WG_PRIVATE_KEY=${WG_PRIVATE_KEY}
+      - WG_GATEWAY_PUBLIC_KEY=${WG_GATEWAY_PUBLIC_KEY}
+      - WG_ENDPOINT=${WG_ENDPOINT:-vpn-geoffjay-com.fly.dev:51820}
+      - WG_CLIENT_IP=${WG_CLIENT_IP:-10.10.0.2}
+      - WG_ALLOWED_IPS=${WG_ALLOWED_IPS:-10.10.0.0/24}
+      - HOST_INTERFACE=${HOST_INTERFACE:-eth0}
+    network_mode: host
+    volumes:
+      - /lib/modules:/lib/modules:ro
