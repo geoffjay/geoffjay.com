@@ -1,0 +1,5 @@
+{
+  "name": "Photo Gallery",
+  "description": "A smart photo organization app featuring year-based grouping, custom tagging, and AI-powered auto-tagging capabilities.",
+  "requestFramePermissions": []
+}

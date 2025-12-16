@@ -17,3 +17,7 @@ tasks:
     dir: ./client
     cmds:
       - yarn dev
+  photo/dev:
+    dir: ./photo
+    cmds:
+      - yarn dev
