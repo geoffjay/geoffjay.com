@@ -135,8 +135,8 @@ sudo podman exec wireguard-client wg show
 From a Fly.io app:
 
 ```bash
-# SSH into any Fly.io app
-fly ssh console --app geoffjay-com
+# SSH into the VPN Fly.io app
+fly ssh console --app vpn-geoffjay-com
 
 # Ping the Linux server via WireGuard
 ping 10.10.0.2
