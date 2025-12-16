@@ -26,7 +26,11 @@
   place-self: center;
   width: var(--d);
   --ca: calc(var(--i) * var(--ba));
-  transform: rotate(var(--ca)) translate(var(--r)) rotate(calc(-1 * var(--ca)));
+  transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
+  opacity: 0;
+}
+
+.menu-open li {
   animation: reveal 1s;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -128,4 +132,34 @@
     opacity: 0;
     transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
   }
+}
+
+/* Menu item styles */
+.menu-item {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.menu-item:hover .menu-item-image {
+  transform: scale(1.08);
+}
+
+.menu-item:hover .menu-item-overlay {
+  opacity: 0.15;
+}
+
+.menu-item-image {
+  transition: transform 0.2s ease-out;
+}
+
+.menu-item-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 20;
+  pointer-events: none;
 }
