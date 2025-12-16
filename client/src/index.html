@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" id="root">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,12 +12,34 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
-    <script type="application/javascript">
-      import _hyperscript from "hyperscript.org";
-      _hyperscript.browserInit();
+    <script>
+      // Apply theme immediately to prevent flash
+      (function () {
+        var theme = localStorage.getItem("theme");
+        var isDark =
+          theme === "dark" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        }
+        // Set icon visibility after DOM is ready
+        document.addEventListener("DOMContentLoaded", function () {
+          var sunIcon = document.getElementById("icon-sun");
+          var moonIcon = document.getElementById("icon-moon");
+          if (sunIcon && moonIcon) {
+            if (isDark) {
+              moonIcon.classList.remove("hidden");
+              sunIcon.classList.add("hidden");
+            } else {
+              sunIcon.classList.remove("hidden");
+              moonIcon.classList.add("hidden");
+            }
+          }
+        });
+      })();
     </script>
   </head>
-  <body hx-ext="templates,preload">
+  <body hx-ext="preload">
     <div class="flex flex-col h-screen bg-slate-200 dark:bg-slate-600">
       <div class="flex justify-center items-center h-screen">
         <button
@@ -169,6 +191,26 @@
           <i class="fa-brands fa-at fa-lg my-auto"></i>
           <p>geoff.jay@gmail.com</p>
         </a>
+        <button
+          id="theme-toggle"
+          class="flex gap-2 my-auto hover:text-slate-600 hover:dark:text-slate-400 cursor-pointer"
+          type="button"
+          _="on click
+              if #root matches .dark
+                remove .dark from #root
+                call localStorage.setItem('theme', 'light')
+                add .hidden to #icon-moon
+                remove .hidden from #icon-sun
+              else
+                add .dark to #root
+                call localStorage.setItem('theme', 'dark')
+                add .hidden to #icon-sun
+                remove .hidden from #icon-moon
+              end"
+        >
+          <i id="icon-sun" class="fa-solid fa-sun fa-lg my-auto hidden"></i>
+          <i id="icon-moon" class="fa-solid fa-moon fa-lg my-auto hidden"></i>
+        </button>
       </div>
     </div>
   </body>

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Override Font Awesome display for hidden icons */
+.fa-solid.hidden,
+.fa-regular.hidden,
+.fa-brands.hidden {
+  display: none !important;
+}
+
 .drop-shadow-lg {
   --tw-drop-shadow: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04))
     drop-shadow(0 4px 3px rgba(0, 0, 0, 0.4));
