@@ -40,3 +40,7 @@ api/bin
 
 # blog
 blog/target
+
+# AI/MCP
+.mcp.json
+.playwright-mcp
