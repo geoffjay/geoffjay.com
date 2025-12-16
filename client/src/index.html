@@ -21,26 +21,35 @@
     <div class="flex flex-col h-screen bg-slate-200 dark:bg-slate-600">
       <div class="flex justify-center items-center h-screen">
         <button
-          class="relative flex h-[120px] w-[120px]"
+          class="menu-button relative flex h-[120px] w-[120px]"
           type="button"
-          _="on click toggle .hidden-anim on #menu
-              if #menu matches .hidden-anim
+          _="on click
+              add .pulse to me
+              wait 0.3s
+              remove .pulse from me
+            then
+              if #menu matches .hidden
+                remove .hidden from #menu
+                remove .menu-closing from #menu-list
+              else
+                add .menu-closing to #menu-list
                 wait 0.5s
-              end
-              toggle .hidden on #menu"
+                add .hidden to #menu
+              end"
         >
           <span
             class="absolute inline-flex h-full w-full rounded-full bg-slate-300 dark:bg-slate-700 opacity-50"
           ></span>
+          <span class="menu-button-overlay"></span>
           <img
             src="/geoffjay.png"
             alt="geoffjay"
-            class="w-[120px] h-[120px] filter drop-shadow-lg z-10"
+            class="menu-button-image w-[120px] h-[120px] filter drop-shadow-lg z-10"
           />
         </button>
 
-        <div id="menu" class="absolute hidden-anim hidden">
-          <ul class="menu" style="--m: 4">
+        <div id="menu" class="absolute hidden">
+          <ul id="menu-list" class="menu" style="--m: 4">
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 0">
               <a href="https://app.geoffjay.com" target="_blank">
                 <img

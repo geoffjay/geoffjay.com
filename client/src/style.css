@@ -61,3 +61,71 @@
     transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
   }
 }
+
+/* Menu button styles */
+.menu-button {
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.menu-button:hover .menu-button-image {
+  transform: scale(1.08);
+}
+
+.menu-button:hover .menu-button-overlay {
+  opacity: 0.15;
+}
+
+.menu-button-image {
+  transition: transform 0.2s ease-out;
+}
+
+.menu-button-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Pulse animation on click */
+@keyframes pulse-click {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse-click 0.3s ease-out;
+}
+
+/* Menu items close animation - slide back without fade */
+.menu-closing li {
+  animation: slide-back 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slide-back {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--ca)) translate(var(--r))
+      rotate(calc(-1 * var(--ca)));
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
+  }
+}
