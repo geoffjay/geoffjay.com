@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.geoffjay.habits",
+      "sha256_cert_fingerprints": [
+        "33:92:5D:1C:37:59:9A:48:7A:DA:8D:6F:90:9B:3D:4E:AF:BB:71:4B:CA:74:12:37:EC:16:2B:6B:DC:F9:F0:58"
+      ]
+    }
+  }
+]
