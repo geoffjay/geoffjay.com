@@ -1,4 +1,4 @@
-module github.com/geoffjay/geoffjay.com/api
+module github.com/geoffjay/geoffjay.com/api/health
 
 go 1.23.4
 

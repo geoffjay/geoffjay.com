@@ -1,16 +1,21 @@
 version: "3"
 
 tasks:
+  core:
+    desc: "Run docker compose core profile"
+    cmds:
+      - docker compose --profile core up
   dev:
     desc: "Run development environment"
     cmds:
+      - task: core
       - overmind start
   api/build:
     dir: ./api
     cmds:
       - go build -o ./bin/api
   api/dev:
-    dir: ./api
+    dir: ./api/health
     cmds:
       - air
   client/dev:

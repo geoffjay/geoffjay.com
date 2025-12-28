@@ -4,7 +4,7 @@
 #
 
 app = 'pocketbase-geoffjay-com'
-primary_region = 'sea'
+primary_region = 'yyz'
 
 [build]
 
