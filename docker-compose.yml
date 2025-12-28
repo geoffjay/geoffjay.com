@@ -16,18 +16,8 @@ services:
       - app.geoffjay.local:127.0.0.1
     profiles:
       - core
-
-  pocketbase:
-    container_name: pocketbase
-    build:
-      context: ./pocketbase
-    restart: unless-stopped
-    ports:
-      - "8081:8081"
-    volumes:
-      - ./pocketbase/data:/pb/pb_data
-    profiles:
-      - core
+    networks:
+      - geoffjay-com
 
   api:
     container_name: api
@@ -40,6 +30,8 @@ services:
       - ./api:/api
     profiles:
       - services
+    networks:
+      - geoffjay-com
 
   app:
     container_name: app
@@ -53,6 +45,8 @@ services:
       - ./app:/app
     profiles:
       - applications
+    networks:
+      - geoffjay-com
 
   photo:
     container_name: photo
@@ -66,3 +60,9 @@ services:
       - ./photo:/photo
     profiles:
       - applications
+    networks:
+      - geoffjay-com
+
+networks:
+  geoffjay-com:
+    external: true
