@@ -39,7 +39,25 @@
       })();
     </script>
   </head>
-  <body hx-ext="preload">
+  <body
+    hx-ext="preload"
+    _="on click
+        if #menu does not match .hidden
+          if not event.target.closest('#menu') and not event.target.closest('.menu-button')
+            remove .menu-open from #menu-list
+            add .menu-closing to #menu-list
+            wait 0.5s
+            add .hidden to #menu
+          end
+        end
+      on keydown[key is 'Escape'] from window
+        if #menu does not match .hidden
+          remove .menu-open from #menu-list
+          add .menu-closing to #menu-list
+          wait 0.5s
+          add .hidden to #menu
+        end"
+  >
     <div class="flex flex-col h-screen bg-slate-200 dark:bg-slate-600">
       <div class="flex justify-center items-center h-screen">
         <button
@@ -94,6 +112,9 @@
                   alt="app"
                   class="menu-item-image w-[120px] h-[120px] filter drop-shadow-lg"
                 />
+                <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
+                  >personal app</span
+                >
               </a>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 1">
@@ -115,6 +136,9 @@
                   alt="about"
                   class="menu-item-image w-[120px] h-[120px] filter drop-shadow-lg"
                 />
+                <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
+                  >about</span
+                >
               </a>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 2">
@@ -137,6 +161,9 @@
                   alt="blog"
                   class="menu-item-image w-[120px] h-[120px] filter drop-shadow-lg"
                 />
+                <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
+                  >blog</span
+                >
               </a>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 3">
@@ -158,6 +185,9 @@
                   alt="projects"
                   class="menu-item-image w-[120px] h-[120px] filter drop-shadow-lg"
                 />
+                <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
+                  >projects</span
+                >
               </a>
             </li>
           </ul>

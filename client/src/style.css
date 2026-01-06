@@ -144,8 +144,25 @@
 /* Menu item styles */
 .menu-item {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
+}
+
+.menu-item span:last-child {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.menu-open .menu-item span:last-child {
+  opacity: 1;
+  transition: opacity 0.3s ease-out 0.5s;
+}
+
+.menu-closing .menu-item span:last-child {
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 }
 
 .menu-item:hover .menu-item-image {
