@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Minimum page dimensions */
+html,
+body {
+  min-width: 400px;
+  min-height: 800px;
+}
+
 /* Override Font Awesome display for hidden icons */
 .fa-solid.hidden,
 .fa-regular.hidden,
@@ -35,6 +42,22 @@
   --ca: calc(var(--i) * var(--ba));
   transform: rotate(var(--ca)) translate(0) rotate(calc(-1 * var(--ca)));
   opacity: 0;
+}
+
+/* Mobile: position items at diagonal angles to avoid screen edges */
+@media (max-width: 640px) {
+  .menu li[style*="--i: 0"] {
+    --ca: 0.3056turn; /* 110° */
+  }
+  .menu li[style*="--i: 1"] {
+    --ca: 0.6944turn; /* 250° */
+  }
+  .menu li[style*="--i: 2"] {
+    --ca: 0.8056turn; /* 290° */
+  }
+  .menu li[style*="--i: 3"] {
+    --ca: 0.1944turn; /* 70° */
+  }
 }
 
 .menu-open li {
@@ -77,6 +100,10 @@
 .menu-button {
   cursor: pointer;
   transition: transform 0.2s ease-out;
+}
+
+.menu-button:focus-visible {
+  outline: none;
 }
 
 .menu-button:hover .menu-button-image {
@@ -150,17 +177,20 @@
   cursor: pointer;
 }
 
-.menu-item span:last-child {
+.menu-item span:last-child,
+.menu-item-image {
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
 
-.menu-open .menu-item span:last-child {
+.menu-open .menu-item span:last-child,
+.menu-open .menu-item-image {
   opacity: 1;
   transition: opacity 0.3s ease-out 0.5s;
 }
 
-.menu-closing .menu-item span:last-child {
+.menu-closing .menu-item span:last-child,
+.menu-closing .menu-item-image {
   opacity: 0;
   transition: opacity 0.2s ease-out;
 }

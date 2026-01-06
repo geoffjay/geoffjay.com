@@ -69,6 +69,9 @@
               remove .pulse from me
             then
               if #menu matches .hidden
+                add .opacity-0 to #click-here
+                wait 0.3s
+                add .hidden to #click-here
                 remove .hidden from #menu
                 remove .menu-closing from #menu-list
                 add .menu-open to #menu-list
@@ -89,6 +92,72 @@
             class="menu-button-image w-[120px] h-[120px] filter drop-shadow-lg z-10"
           />
         </button>
+
+        <svg
+          id="click-here"
+          class="absolute translate-x-[-80%] translate-y-[120%] w-[150px] text-slate-500 dark:text-slate-400 drop-shadow-lg transition-opacity duration-300 opacity-0"
+          viewBox="0 0 229.9890343570887 142.63442107332503"
+          xmlns="http://www.w3.org/2000/svg"
+          _="on load wait 3s remove .opacity-0 from me"
+        >
+          <defs>
+            <style>
+              @font-face {
+                font-family: Excalifont;
+                src: url(data:font/woff2;base64,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);
+              }
+            </style>
+          </defs>
+          <g
+            transform="translate(10 102.2525819406269) rotate(0 49.08995819091797 12.5)"
+          >
+            <text
+              x="-120"
+              y="17.619999999999997"
+              font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji"
+              font-size="20px"
+              fill="currentColor"
+              text-anchor="start"
+              style="white-space: pre"
+              direction="ltr"
+              dominant-baseline="alphabetic"
+            >
+              click here?
+            </text>
+          </g>
+          <g stroke-linecap="round">
+            <g
+              transform="translate(119.17982134256363 127.25341645970502) rotate(0 50.25412184955576 -55.93620592304262)"
+            >
+              <path
+                d="M0.76 -0.33 C9.75 -1.07, 38.26 15.27, 54.52 -4.22 C70.79 -23.71, 90.92 -98.51, 98.34 -117.25 M-0.3 -1.55 C8.47 -2.65, 36.65 13.15, 53.5 -6 C70.35 -25.16, 93.19 -98.17, 100.81 -116.46"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              ></path>
+            </g>
+            <g
+              transform="translate(119.17982134256363 127.25341645970502) rotate(0 50.25412184955576 -55.93620592304262)"
+            >
+              <path
+                d="M100.74 -91.46 C100.17 -100.39, 101.82 -110.18, 100.81 -116.46 M100.74 -91.46 C101.25 -96.95, 99.85 -103.29, 100.81 -116.46"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              ></path>
+            </g>
+            <g
+              transform="translate(119.17982134256363 127.25341645970502) rotate(0 50.25412184955576 -55.93620592304262)"
+            >
+              <path
+                d="M84.69 -97.36 C89.7 -104.34, 96.93 -112.08, 100.81 -116.46 M84.69 -97.36 C88.67 -101.51, 90.74 -106.57, 100.81 -116.46"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              ></path>
+            </g>
+          </g>
+        </svg>
 
         <div id="menu" class="absolute hidden">
           <ul id="menu-list" class="menu" style="--m: 4">
