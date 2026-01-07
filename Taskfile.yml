@@ -26,3 +26,7 @@ tasks:
     dir: ./photo
     cmds:
       - yarn dev
+  projects/dev:
+    dir: ./projects
+    cmds:
+      - bun run dev
