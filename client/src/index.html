@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
     <script>
       // Apply theme immediately to prevent flash
@@ -56,6 +57,10 @@
           add .menu-closing to #menu-list
           wait 0.5s
           add .hidden to #menu
+        end
+        if #about-drawer matches .drawer-open
+          remove .drawer-open from #about-drawer
+          add .drawer-closed to #about-drawer
         end"
   >
     <div class="flex flex-col h-screen bg-slate-200 dark:bg-slate-600">
@@ -187,17 +192,20 @@
               </a>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 1">
-              <a
-                href="/about"
+              <button
+                type="button"
                 class="menu-item"
                 _="on click
+                    halt the event
                     add .pulse to me
                     remove .menu-open from #menu-list
                     add .menu-closing to #menu-list
                     wait 0.3s
                     remove .pulse from me
                     wait 0.2s
-                    add .hidden to #menu"
+                    add .hidden to #menu
+                    remove .drawer-closed from #about-drawer
+                    add .drawer-open to #about-drawer"
               >
                 <span class="menu-item-overlay"></span>
                 <img
@@ -208,7 +216,7 @@
                 <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
                   >about</span
                 >
-              </a>
+              </button>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 2">
               <a
@@ -264,6 +272,42 @@
       </div>
 
       <div
+        id="about-drawer"
+        class="drawer drawer-closed"
+        _="on click
+            if event.target is me
+              remove .drawer-open from me
+              add .drawer-closed to me
+            end"
+      >
+        <div class="drawer-content">
+          <button
+            type="button"
+            class="drawer-close"
+            _="on click
+                remove .drawer-open from #about-drawer
+                add .drawer-closed to #about-drawer"
+          >
+            <i data-lucide="x"></i>
+          </button>
+          <div class="drawer-body">
+            <h2
+              class="text-2xl font-semibold text-slate-700 dark:text-slate-200 mb-6"
+            >
+              About
+            </h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-4">
+              Hi, I'm Geoff. I'm a software developer who enjoys building
+              things.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300">
+              This is my landing page on the web where I link to other projects.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
         class="h-10 w-full flex gap-4 my-auto justify-center align-middle bg-slate-300 dark:bg-slate-700 border-t-2 border-t-slate-400 dark:border-t-slate-500 text-sm text-slate-400 dark:text-slate-500"
       >
         <a
@@ -312,5 +356,8 @@
         </button>
       </div>
     </div>
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>
