@@ -244,17 +244,19 @@
               </a>
             </li>
             <li class="absolute bg-slate-200 dark:bg-slate-600" style="--i: 3">
-              <a
-                href="/projects"
+              <button
+                type="button"
                 class="menu-item"
                 _="on click
+                    halt the event
                     add .pulse to me
                     remove .menu-open from #menu-list
                     add .menu-closing to #menu-list
                     wait 0.3s
                     remove .pulse from me
                     wait 0.2s
-                    add .hidden to #menu"
+                    add .hidden to #menu
+                    go to url '/projects'"
               >
                 <span class="menu-item-overlay"></span>
                 <img
@@ -265,7 +267,7 @@
                 <span class="text-slate-500 dark:text-slate-400 text-sm mt-4"
                   >projects</span
                 >
-              </a>
+              </button>
             </li>
           </ul>
         </div>
