@@ -34,9 +34,9 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({
         {projects.map((project) => (
           <div
             key={project.id}
-            className={`group relative aspect-square bg-gray-100 overflow-hidden cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-all ${
+            className={`group relative aspect-square bg-gray-100 overflow-hidden cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition-all ${
               selectedProjectId === project.id
-                ? "ring-2 ring-blue-500 ring-offset-2"
+                ? "ring-4 ring-blue-500 ring-offset-0"
                 : ""
             }`}
             onClick={() => onProjectClick(project)}
@@ -88,7 +88,7 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({
         {projects.map((project) => (
           <div
             key={project.id}
-            className={`group flex items-center gap-4 p-3 bg-white rounded-lg border hover:shadow-md transition-all cursor-pointer ${
+            className={`group flex items-center gap-4 p-3 bg-white rounded-lg border border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
               selectedProjectId === project.id
                 ? "border-blue-500 bg-blue-50/50"
                 : "border-gray-100"
@@ -196,9 +196,9 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({
       {projects.map((project) => (
         <div
           key={project.id}
-          className={`group relative bg-white rounded-xl shadow-sm border overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+          className={`group relative bg-white rounded-xl shadow-md border overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
             selectedProjectId === project.id
-              ? "border-blue-500 ring-1 ring-blue-500"
+              ? "border-blue-500 ring-2 ring-blue-500"
               : "border-gray-100"
           }`}
           onClick={() => onProjectClick(project)}
