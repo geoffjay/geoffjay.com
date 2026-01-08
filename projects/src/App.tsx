@@ -5,6 +5,7 @@ import { Project, ProjectViewMode } from "./types";
 import { MOCK_PROJECTS } from "./constants";
 import { LayoutGrid, Grid3x3, List as ListIcon } from "lucide-react";
 
+
 const STORAGE_KEY = "projects-selected-id";
 const VIEW_MODE_KEY = "projects-view-mode";
 
@@ -16,6 +17,7 @@ const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<ProjectViewMode>(
     ProjectViewMode.COMFORTABLE
   );
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Load selected project from localStorage on mount
   useEffect(() => {
@@ -46,6 +48,11 @@ const App: React.FC = () => {
   const handleProjectClick = (project: Project) => {
     setSelectedProjectId(project.id);
     localStorage.setItem(STORAGE_KEY, project.id);
+    setSidebarOpen(true);
+  };
+
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false);
   };
 
   return (
@@ -105,9 +112,21 @@ const App: React.FC = () => {
         </main>
       </div>
 
-      {/* Right Sidebar - Always visible */}
+      {/* Mobile Overlay */}
+      {selectedProject && sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden transition-opacity duration-300"
+          onClick={handleCloseSidebar}
+        />
+      )}
+
+      {/* Right Sidebar - Always visible on md+, toggled on mobile */}
       {selectedProject && (
-        <ProjectSidebar project={selectedProject} />
+        <ProjectSidebar
+          project={selectedProject}
+          isOpen={sidebarOpen}
+          onClose={handleCloseSidebar}
+        />
       )}
     </div>
   );

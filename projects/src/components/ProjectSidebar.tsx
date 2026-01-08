@@ -10,13 +10,20 @@ import {
   FileText,
   Link as LinkIcon,
   Info,
+  X,
 } from "lucide-react";
 
 interface ProjectSidebarProps {
   project: Project;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const ProjectSidebar: React.FC<ProjectSidebarProps> = ({ project }) => {
+const ProjectSidebar: React.FC<ProjectSidebarProps> = ({
+  project,
+  isOpen,
+  onClose,
+}) => {
   const [activeTab, setActiveTab] = useState<ProjectTab>("overview");
 
   const tabs: { id: ProjectTab; label: string; icon: React.ReactNode }[] = [
@@ -26,7 +33,23 @@ const ProjectSidebar: React.FC<ProjectSidebarProps> = ({ project }) => {
   ];
 
   return (
-    <div className="w-80 lg:w-96 bg-white border-l border-gray-200 flex flex-col h-full">
+    <div
+      className={`
+        fixed inset-y-0 right-0 z-40 w-80 lg:w-96 bg-white border-l border-gray-200 flex flex-col h-full
+        transform transition-transform duration-300 ease-in-out
+        md:relative md:translate-x-0
+        ${isOpen ? "translate-x-0" : "translate-x-full"}
+      `}
+    >
+      {/* Close Button - Mobile Only */}
+      <button
+        onClick={onClose}
+        className="absolute top-3 right-3 z-50 p-1.5 bg-gray-900/70 text-white rounded-full hover:bg-gray-900 transition-colors md:hidden"
+        aria-label="Close sidebar"
+      >
+        <X size={18} />
+      </button>
+
       {/* Project Image */}
       <div className="relative">
         <div className="aspect-video w-full overflow-hidden bg-gray-100">
