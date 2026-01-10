@@ -19,49 +19,49 @@ services:
     networks:
       - geoffjay-com
 
-  api:
-    container_name: api
-    build:
-      context: ./api
-    restart: unless-stopped
-    ports:
-      - "8082:8080"
-    volumes:
-      - ./api:/api
-    profiles:
-      - services
-    networks:
-      - geoffjay-com
-
-  app:
-    container_name: app
-    build:
-      context: ./app
-      dockerfile: dev.Dockerfile
-    restart: unless-stopped
-    ports:
-      - "8083:5173"
-    volumes:
-      - ./app:/app
-    profiles:
-      - applications
-    networks:
-      - geoffjay-com
-
-  photo:
-    container_name: photo
-    build:
-      context: ./photo
-      dockerfile: dev.Dockerfile
-    restart: unless-stopped
-    ports:
-      - "8084:5173"
-    volumes:
-      - ./photo:/photo
-    profiles:
-      - applications
-    networks:
-      - geoffjay-com
+  # api:
+  #   container_name: api
+  #   build:
+  #     context: ./api
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8082:8080"
+  #   volumes:
+  #     - ./api:/api
+  #   profiles:
+  #     - services
+  #   networks:
+  #     - geoffjay-com
+  #
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: ./app
+  #     dockerfile: dev.Dockerfile
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8083:5173"
+  #   volumes:
+  #     - ./app:/app
+  #   profiles:
+  #     - applications
+  #   networks:
+  #     - geoffjay-com
+  #
+  # photo:
+  #   container_name: photo
+  #   build:
+  #     context: ./photo
+  #     dockerfile: dev.Dockerfile
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8084:5173"
+  #   volumes:
+  #     - ./photo:/photo
+  #   profiles:
+  #     - applications
+  #   networks:
+  #     - geoffjay-com
 
 networks:
   geoffjay-com:
