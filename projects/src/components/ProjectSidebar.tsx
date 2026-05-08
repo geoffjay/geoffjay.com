@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Project, ProjectTab } from "../types";
-import { STATUS_LABELS, STATUS_COLORS } from "../constants";
+import { STATUS_LABELS, STATUS_COLORS, CREATOR_LABELS, CREATOR_COLORS } from "../constants";
 import {
   Calendar,
   Github,
@@ -11,6 +11,7 @@ import {
   Link as LinkIcon,
   Info,
   X,
+  Bot,
 } from "lucide-react";
 
 interface ProjectSidebarProps {
@@ -244,6 +245,19 @@ const ProjectSidebar: React.FC<ProjectSidebarProps> = ({
                   {STATUS_LABELS[project.status]}
                 </span>
               </div>
+            </div>
+
+            {/* Creator */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                <Bot size={14} />
+                Creator
+              </h3>
+              <span
+                className={`inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg ${CREATOR_COLORS[project.creator]}`}
+              >
+                {CREATOR_LABELS[project.creator]}
+              </span>
             </div>
           </div>
         )}

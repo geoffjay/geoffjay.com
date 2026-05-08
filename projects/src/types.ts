@@ -1,3 +1,10 @@
+export enum CreatorType {
+  MAN_MADE = "MAN_MADE",
+  HUMAN_IN_THE_LOOP = "HUMAN_IN_THE_LOOP",
+  CLANKER_DOMINANT = "CLANKER_DOMINANT",
+  PURE_SLOP = "PURE_SLOP",
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -11,6 +18,7 @@ export interface Project {
   startDate: string; // ISO Date
   lastUpdated: string; // ISO Date
   featured: boolean;
+  creator: CreatorType;
 }
 
 export enum ProjectStatus {

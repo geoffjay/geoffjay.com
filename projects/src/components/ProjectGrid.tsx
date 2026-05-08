@@ -15,16 +15,18 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({
   onProjectClick,
   viewMode,
 }) => {
-  if (projects.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[50vh] text-gray-400">
-        <div className="bg-gray-100 p-6 rounded-full mb-4">
-          <FolderKanban size={48} className="text-gray-300" />
-        </div>
-        <p className="text-lg font-medium">No projects found</p>
-        <p className="text-sm">Try changing your filters.</p>
+  const renderEmpty = () => (
+    <div className="flex flex-col items-center justify-center h-[50vh] text-gray-400">
+      <div className="bg-gray-100 p-6 rounded-full mb-4">
+        <FolderKanban size={48} className="text-gray-300" />
       </div>
-    );
+      <p className="text-lg font-medium">No projects found</p>
+      <p className="text-sm">Try changing your filters.</p>
+    </div>
+  );
+
+  if (projects.length === 0) {
+    return renderEmpty();
   }
 
   // COMPACT VIEW

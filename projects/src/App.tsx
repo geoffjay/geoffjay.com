@@ -5,17 +5,16 @@ import { Project, ProjectViewMode } from "./types";
 import { MOCK_PROJECTS } from "./constants";
 import { LayoutGrid, Grid3x3, List as ListIcon } from "lucide-react";
 
-
 const STORAGE_KEY = "projects-selected-id";
 const VIEW_MODE_KEY = "projects-view-mode";
 
 const App: React.FC = () => {
   const [projects] = useState<Project[]>(MOCK_PROJECTS);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
-    null
+    null,
   );
   const [viewMode, setViewMode] = useState<ProjectViewMode>(
-    ProjectViewMode.COMFORTABLE
+    ProjectViewMode.COMFORTABLE,
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -24,7 +23,10 @@ const App: React.FC = () => {
     const savedId = localStorage.getItem(STORAGE_KEY);
     const savedViewMode = localStorage.getItem(VIEW_MODE_KEY);
 
-    if (savedViewMode && Object.values(ProjectViewMode).includes(savedViewMode as ProjectViewMode)) {
+    if (
+      savedViewMode &&
+      Object.values(ProjectViewMode).includes(savedViewMode as ProjectViewMode)
+    ) {
       setViewMode(savedViewMode as ProjectViewMode);
     }
 
